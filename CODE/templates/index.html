@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Frankenstein</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <script>
+        function showSpinner() {
+            document.getElementById('spinner').style.display = 'block';
+        }
+
+        window.onload = function() {
+            document.getElementById('spinner').style.display = 'none';
+        }
+
+        function checkButtonStatus() {
+            var selectedFile = document.getElementById('selected_file').value;
+            var ourColor = document.getElementById('our_color').value;
+            var getAiMoveButton = document.getElementById('get_ai_move');
+            getAiMoveButton.disabled = !(selectedFile && ourColor);
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>walk you own chess</h1>
+    </div>
+
+    <div class="container"> <!-- ✅ 补上 container -->
+        <div class="board-container">
+            {% if extracted_image_path %}
+                <img src="{{ url_for('serve_extracted_data', filename='Extracted-Board.jpeg') }}" alt="Extracted Chess Board" style="max-width: 100%; height: auto;">
+                <div class="board-info-box">
+                    {% if selected_file %}
+                        <p>当前处理的图片: {{ selected_file }}</p>
+                    {% endif %}
+                    {% if fen %}
+                        <p>当前 FEN 码: {{ fen }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="info-container">
+            <h1>Chess Game Controls</h1>
+
+            <!-- 上传图片表单 -->
+            <form action="/" method="post" enctype="multipart/form-data" onsubmit="showSpinner()">
+                <label for="upload_file">上传新图片:</label>
+                <input type="file" id="upload_file" name="upload_file" accept=".png,.jpg,.jpeg,.gif">
+                <input type="submit" name="upload_image" value="Upload Image">
+            </form>
+
+            <!-- 选择已有图片表单 -->
+            <form action="/" method="post" onsubmit="showSpinner()">
+                <label for="selected_file">选择测试图片</label>
+                <select id="selected_file" name="selected_file" onchange="checkButtonStatus()">
+                    <option value="">请选择</option>
+                    {% for file in files %}
+                        <option value="{{ file }}" {% if selected_file == file %}selected{% endif %}>{{ file }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="our_color">我方颜色</label>
+                <select id="our_color" name="our_color" onchange="checkButtonStatus()">
+                    <option value="">请选择</option>
+                    <option value="white" {% if our_color == 1 %}selected{% endif %}>White</option>
+                    <option value="black" {% if our_color == 0 %}selected{% endif %}>Black</option>
+                </select>
+
+                <input type="submit" name="process_image" value="Process Image">
+                <input type="submit" id="get_ai_move" name="get_ai_move" value="Get AI Move" {% if not can_get_ai_move %}disabled{% endif %}>
+            </form>
+
+            {% if ai_move %}
+                <div class="ai-move-box">
+                    AI Recommended Move: {{ ai_move }}
+                </div>
+            {% endif %}
+
+            {% if error_message %}
+                <div class="error-message">
+                    {{ error_message }}
+                </div>
+            {% endif %}
+        </div>
+    </div> <!-- 这里 container 结束 -->
+
+    <div id="spinner">
+        <div class="loader"></div>
+    </div>
+</body>
+</html>
