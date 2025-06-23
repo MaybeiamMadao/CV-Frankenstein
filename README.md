@@ -25,6 +25,7 @@
     ```bash
     git clone https://github.com/MaybeiamMadao/CV-Frankenstein.git
     cd CV-Frankenstein
+    cd CODE
     ```
 
 2.  **启动Web应用**
@@ -56,17 +57,21 @@
 
 ```
 CV-Frankenstein/
-├── chessEngine/
-│   └── stockfish-10-win/      # Stockfish AI 引擎
-├── extract_data/              # 存放处理后的中间图像
-├── images/                    # 存放测试用例图像
-├── model/                     # 存储训练好的YOLO棋子识别模型
-├── static/                    # 前端静态文件 (CSS, JS)
-├── templates/                 # Flask前端HTML模板
-├── app.py                     # Flask Web应用主程序
-├── chess_processer.py         # 核心图像处理与YOLO识别模块
-├── test_script.py             # 用于功能测试的脚本
-└── README.md                  # 项目说明文档
+├── code/
+│   ├── chessEngine/
+│   │   ├── stockfish-10-win/
+│   │   └── stockfish-windows-x86-64-avx2.exe
+│   ├── extract-data/
+│   ├── images/
+│   ├── model/
+│   ├── templates/
+│   │   ├── static/
+│   │   └── index.html
+│   ├── .gitignore
+│   ├── app.py                          # Flask Web应用主程序
+│   ├── chess_processer.py              # 核心图像处理与识别模块
+│   └── test_srcipt.py                  # 功能测试脚本
+└── README.md                           # 项目说明文档
 ```
 
 ### 分支说明
