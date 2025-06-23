@@ -59,19 +59,16 @@
 CV-Frankenstein/
 ├── code/
 │   ├── chessEngine/
-│   │   ├── stockfish-10-win/
-│   │   └── stockfish-windows-x86-64-avx2.exe
-│   ├── extract-data/
-│   ├── images/
-│   ├── model/
+│   │   └── stockfish-10-win/      # 分别为新版和旧版stockfish弈棋ai引擎，供主程序调用
+│   ├── extract-data/              # 用以存储处理后的图像
+│   ├── images/                    # 存放测试图像
+│   ├── model/                     # 存储训练好的yolo棋子识别模型
 │   ├── templates/
-│   │   ├── static/
-│   │   └── index.html
-│   ├── .gitignore
-│   ├── app.py                          # Flask Web应用主程序
-│   ├── chess_processer.py              # 核心图像处理与识别模块
-│   └── test_srcipt.py                  # 功能测试脚本
-└── README.md                           # 项目说明文档
+│   │   └── static/                # 定义前端页面与样式
+│   ├── app.py                     # flask框架主脚本，用以定义api，控制图像处理、调用弈棋ai与前端交互
+│   ├── chess_processer.py         # 图像处理接口，用以接收图像进行处理，调用yolo模型进行棋盘转化，生成FEN码及2d图像
+│   └── test_srcipt.py             # 项目初期用以测试图像处理接口可行性
+└── README.md
 ```
 
 ### 分支说明
