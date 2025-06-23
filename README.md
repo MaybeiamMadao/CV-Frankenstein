@@ -27,18 +27,13 @@
     cd CV-Frankenstein
     ```
 
-2.  **安装依赖**
-    ```bash
-    pip install -r requirements.txt  # 建议创建一个requirements.txt文件，并列出所有依赖库
-    ```
-
-3.  **启动Web应用**
+2.  **启动Web应用**
     ```bash
     python app.py
     ```
     启动后，请根据控制台输出的地址（如 `http://127.0.0.1:5000`）在浏览器中打开，即可开始使用。
 
-4.  **(可选) 命令行测试**
+3.  **(可选) 命令行测试**
     如果您想直接测试图像处理脚本，可以运行：
     ```bash
     python test_script.py
